@@ -1,11 +1,17 @@
+import Todo from "@/models/Todo";
+import connectDB from "@/utils/connectDB";
+
+
 // server action haro dar dakhele server component ha ejra mikonim
 function ServerTodoForm() {
   const addTodo = async (formData) => {
     "use server";
+    await connectDB();
     const title = formData.get("title");
     const description = formData.get("description");
-         console.log(title);
-         console.log(description);
+    const todo = await Todo.create({ title, description });
+    console.log(todo);
+    
   };
   return (
     <div>
