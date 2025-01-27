@@ -1,6 +1,6 @@
 import Todo from "@/models/Todo";
 import connectDB from "@/utils/connectDB";
-
+import { revalidatePath } from "next/cache";
 
 // server action haro dar dakhele server component ha ejra mikonim
 function ServerTodoForm() {
@@ -11,7 +11,7 @@ function ServerTodoForm() {
     const description = formData.get("description");
     const todo = await Todo.create({ title, description });
     console.log(todo);
-    
+    revalidatePath("/");
   };
   return (
     <div>
